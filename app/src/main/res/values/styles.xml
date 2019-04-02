@@ -1,0 +1,55 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="TextView">
+        <item name="android:textAppearance">@style/Text</item>
+        <item name="android:layout_marginBottom">8dp</item>
+    </style>
+
+    <style name="TextView.Primary">
+        <item name="android:textAppearance">@style/Text.Primary</item>
+    </style>
+
+    <style name="TextView.Secondary">
+        <item name="android:textAppearance">@style/Text.Secondary</item>
+    </style>
+    
+    <style name="Text">
+        <item name="android:textSize">@dimen/typical_text_size</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="Text.Primary">
+        <item name="android:textSize">@dimen/primary_text_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Text.Secondary">
+        <item name="android:textSize">@dimen/secondary_text_size</item>
+        <item name="android:textColor">@color/gray_dove_light</item>
+    </style>
+
+    <style name="Button">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/secondary_text_size</item>
+    </style>
+
+    <style name="TextView.Chips">
+        <item name="android:background">@color/colorAccent</item>
+        <item name="android:textAppearance">@style/Button</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:padding">8dp</item>
+
+    </style>
+
+</resources>

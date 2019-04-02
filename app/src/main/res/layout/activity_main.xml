@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/topic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/TextView.Primary"
+        android:text="@string/topic"
+        />
+
+    <TextView
+        android:id="@+id/track"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/TextView.Chips"
+        android:text="@string/track"
+        />
+
+    <TextView
+        android:id="@+id/author"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/TextView.Secondary"
+        android:text="@string/Author" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginBottom="8dp">
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/description"
+            style="@style/TextView"
+            />
+    </ScrollView>
+
+    <Button
+        android:id="@+id/allLectures"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:background="@color/colorPrimary"
+        style="@style/Button"
+        android:text="@string/buttonLectures"/>
+
+</LinearLayout>
