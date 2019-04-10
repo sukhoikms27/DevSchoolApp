@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    >
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintVertical_weight="2"
+        android:padding="16dp"
+        tools:context=".AuthorItemView"
+        android:id="@+id/author_item_view"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/speakerPhoto"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:src="@drawable/author"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/speakerCountry"
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            android:src="@drawable/rus_flag"
+            app:civ_border_color="@color/white"
+            app:civ_border_width="3dp"
+            app:layout_constraintBottom_toBottomOf="@id/speakerPhoto"
+            app:layout_constraintEnd_toEndOf="@id/speakerPhoto" />
+
+        <TextView
+            android:id="@+id/speakerName"
+            style="@style/Text.Primary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_margin_size"
+            android:text="@string/Author"
+            app:layout_constraintStart_toEndOf="@id/speakerPhoto"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/speakerJob"
+            style="@style/Text.Stylished"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_margin_size"
+            android:text="@string/job"
+            app:layout_constraintStart_toEndOf="@id/speakerPhoto"
+            app:layout_constraintTop_toBottomOf="@id/speakerName" />
+
+        <TextView
+            android:id="@+id/speakerLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_margin_size"
+            style="@style/Text"
+            android:text="@string/location"
+            app:layout_constraintStart_toEndOf="@id/speakerPhoto"
+            app:layout_constraintTop_toBottomOf="@+id/speakerJob" />
+
+        <ImageView
+            android:id="@+id/telegram"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_margin="@dimen/small_margin_size"
+            android:src="@drawable/ic_telegram"
+            app:layout_constraintBottom_toBottomOf="@id/speakerPhoto"
+            app:layout_constraintStart_toEndOf="@id/speakerPhoto" />
+
+        <ImageView
+            android:id="@+id/twitter"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_margin="@dimen/small_margin_size"
+            android:src="@drawable/ic_twitter"
+            app:layout_constraintBottom_toBottomOf="@id/speakerPhoto"
+            app:layout_constraintStart_toEndOf="@id/telegram" />
+
+        <ImageView
+            android:id="@+id/link"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_margin="@dimen/small_margin_size"
+            android:src="@drawable/ic_link_variant"
+            app:layout_constraintBottom_toBottomOf="@id/speakerPhoto"
+            app:layout_constraintStart_toEndOf="@id/twitter" />
+
+        <TextView
+            android:id="@+id/speakerInfo"
+            style="@style/TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_margin_size"
+            android:text="@string/about"
+            app:layout_constraintTop_toBottomOf="@id/speakerPhoto" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintVertical_weight="1"
+        android:background="@color/gray_light"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/author_item_view"
+        app:layout_constraintTop_toBottomOf="@+id/author_item_view"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/topic"
+            style="@style/Text.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/topic"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/room"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_margin_size"
+            android:text="Room 1"
+            app:layout_constraintTop_toBottomOf="@+id/topic"
+            app:layout_constraintStart_toStartOf="parent"
+            style="@style/TextView.Secondary"
+             />
+        <TextView
+            android:id="@+id/track"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_margin_size"
+            app:layout_constraintTop_toBottomOf="@id/room"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/track"
+            style="@style/TextView.Chips"
+            />
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12:32"
+            android:layout_marginTop="8dp"
+            android:fontFamily="roboto"
+            app:layout_constraintTop_toBottomOf="@id/track"
+            app:layout_constraintStart_toStartOf="parent"
+            style="@style/Text.Primary"
+            />
+
+        <TextView
+            android:id="@+id/date"
+            style="@style/Text.Stylished"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:text="27 December"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBaseline_toBaselineOf="@id/time"
+            app:layout_constraintStart_toEndOf="@id/time"/>
+    </android.support.constraint.ConstraintLayout>
+
+
+
+
+
+
+</android.support.constraint.ConstraintLayout>

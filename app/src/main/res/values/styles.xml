@@ -20,6 +20,10 @@
     <style name="TextView.Secondary">
         <item name="android:textAppearance">@style/Text.Secondary</item>
     </style>
+
+    <style name="Text.Stylished">
+        <item name="android:textColor">@color/persidian_blue</item>
+    </style>
     
     <style name="Text">
         <item name="android:textSize">@dimen/typical_text_size</item>
@@ -50,6 +54,10 @@
         <item name="android:layout_marginBottom">8dp</item>
         <item name="android:padding">8dp</item>
 
+    </style>
+
+    <style name="Text.Clock">
+        <item name="android:fontFamily"></item>
     </style>
 
 </resources>

@@ -6,4 +6,6 @@
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="gray_dove_light">#666666</color>
+    <color name="persidian_blue">#5500ce</color>
+    <color name="gray_light">#dee7ed</color>
 </resources>
