@@ -21,6 +21,10 @@
         <item name="android:textAppearance">@style/Text.Secondary</item>
     </style>
 
+    <style name="TextView.Secondary.Stylished">
+        <item name="android:textColor">@color/persidian_blue</item>
+    </style>
+
     <style name="Text.Stylished">
         <item name="android:textColor">@color/persidian_blue</item>
     </style>

@@ -12,7 +12,6 @@ data class Speaker(
         var info: String,
         var social: Social,
         var lecture: Lecture
-
 )
 
 data class Social(
