@@ -12,8 +12,7 @@
         android:layout_height="0dp"
         app:layout_constraintVertical_weight="2"
         android:padding="16dp"
-        tools:context=".AuthorItemView"
-        android:id="@+id/author_item_view"
+        tools:context=".SpeakerInfoActivity"
         app:layout_constraintTop_toTopOf="parent"
         >
 
@@ -73,7 +72,8 @@
             android:layout_margin="@dimen/small_margin_size"
             android:src="@drawable/ic_telegram"
             app:layout_constraintBottom_toBottomOf="@id/speakerPhoto"
-            app:layout_constraintStart_toEndOf="@id/speakerPhoto" />
+            app:layout_constraintStart_toEndOf="@id/speakerPhoto"
+            android:visibility="gone"/>
 
         <ImageView
             android:id="@+id/twitter"
@@ -82,7 +82,8 @@
             android:layout_margin="@dimen/small_margin_size"
             android:src="@drawable/ic_twitter"
             app:layout_constraintBottom_toBottomOf="@id/speakerPhoto"
-            app:layout_constraintStart_toEndOf="@id/telegram" />
+            app:layout_constraintStart_toEndOf="@id/telegram"
+            android:visibility="gone"/>
 
         <ImageView
             android:id="@+id/link"
@@ -91,7 +92,8 @@
             android:layout_margin="@dimen/small_margin_size"
             android:src="@drawable/ic_link_variant"
             app:layout_constraintBottom_toBottomOf="@id/speakerPhoto"
-            app:layout_constraintStart_toEndOf="@id/twitter" />
+            app:layout_constraintStart_toEndOf="@id/twitter"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/speakerInfo"
@@ -110,9 +112,8 @@
         app:layout_constraintVertical_weight="1"
         android:background="@color/gray_light"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/author_item_view"
-        app:layout_constraintTop_toBottomOf="@+id/author_item_view"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:id="@+id/lecture_info">
 
         <TextView
             android:id="@+id/topic"

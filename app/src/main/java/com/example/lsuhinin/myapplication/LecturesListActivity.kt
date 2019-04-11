@@ -8,7 +8,7 @@ class LecturesListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_lectures_list)
+        setContentView(R.layout.lectures_list_activity)
         Toast.makeText(this@LecturesListActivity, R.string.error, Toast.LENGTH_SHORT).show()
 
     }

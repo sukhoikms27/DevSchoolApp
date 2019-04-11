@@ -1,6 +1,7 @@
 package com.example.lsuhinin.myapplication.pojo
 
 import com.example.lsuhinin.myapplication.R
+import java.io.Serializable
 
 data class Speaker(
         var id: Long,
@@ -11,14 +12,14 @@ data class Speaker(
         var location: String,
         var info: String,
         var social: Social,
-        var lecture: Lecture
-)
+        var lecture: Lecture? = null
+) : Serializable
 
 data class Social(
         var link: String?,
         var twitter: String?,
         var telegram: String?
-)
+) : Serializable
 
 data class Lecture(
         var topic: String,
@@ -27,7 +28,7 @@ data class Lecture(
         var track: String,
         var time: String,
         var date: String
-)
+) : Serializable
 
 val shishkinEvg: Speaker = Speaker(
         id = 1L,
@@ -49,5 +50,20 @@ val shishkinEvg: Speaker = Speaker(
                 time = "16:35",
                 date = "27 November"
         )
+)
+
+val developer: Speaker = Speaker(
+        id = 2L,
+        imageSrc = R.drawable.my_photo,
+        country = R.drawable.rus_flag,
+        name = "Leonid Sukhinin",
+        job = "Petuh Corp.",
+        location = "St. Petersburg, Russia",
+        info = "QA QA QA",
+        social = Social(
+                link = null,
+                twitter = null,
+                telegram = "@sukhoikms27"),
+        lecture = null
 )
 

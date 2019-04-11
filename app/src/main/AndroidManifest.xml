@@ -9,9 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AuthorItemView"></activity>
+        <activity android:name=".SpeakerInfoActivity"></activity>
         <activity android:name=".LecturesListActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".LectureInfoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
