@@ -113,7 +113,8 @@
         android:background="@color/gray_light"
         app:layout_constraintBottom_toBottomOf="parent"
         android:padding="16dp"
-        android:id="@+id/lecture_info">
+        android:id="@+id/lecture_info"
+        android:visibility="invisible">
 
         <TextView
             android:id="@+id/topic"

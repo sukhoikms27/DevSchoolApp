@@ -25,8 +25,8 @@ class LectureInfoActivity : AppCompatActivity() {
         info = findViewById(R.id.info)
 
         allLectures.setOnClickListener { openLecturesActivity() }
-        author.setOnClickListener { openSpeakerInfoActivity() }
-        info.setOnClickListener { openAuthorInfo() }
+        author.setOnClickListener { openSpeakerInfoActivity(shishkinEvg) }
+        info.setOnClickListener { openSpeakerInfoActivity(developer) }
     }
 
     fun openLecturesActivity() {
@@ -34,16 +34,9 @@ class LectureInfoActivity : AppCompatActivity() {
         startActivity(lecturesListActivityIntent)
     }
 
-    fun openSpeakerInfoActivity() {
+    fun openSpeakerInfoActivity(speaker: Speaker) {
         val speakerInfoActivityIntent = Intent(this@LectureInfoActivity, SpeakerInfoActivity::class.java)
-        speakerInfoActivityIntent.putExtra(Speaker::class.simpleName, shishkinEvg)
+        speakerInfoActivityIntent.putExtra("speaker", speaker)
         startActivity(speakerInfoActivityIntent)
     }
-
-    fun openAuthorInfo() {
-        val authorInfoActivityIntent = Intent(this@LectureInfoActivity, SpeakerInfoActivity::class.java)
-        authorInfoActivityIntent.putExtra(Speaker::class.simpleName, developer)
-        startActivity(authorInfoActivityIntent)
-    }
-
 }

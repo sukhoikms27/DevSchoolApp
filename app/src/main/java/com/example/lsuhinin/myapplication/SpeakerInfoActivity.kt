@@ -53,9 +53,8 @@ class SpeakerInfoActivity : AppCompatActivity() {
         date = findViewById(R.id.date)
         lecture = findViewById(R.id.lecture_info)
 
-        speaker = intent.extras.getSerializable(Speaker::class.simpleName) as Speaker
-
-        displayUserInfo(speaker!!)
+        speaker = intent.extras.getSerializable("speaker") as Speaker
+        displayUserInfo(speaker)
         lecture.setOnClickListener { openLectureInfoActivity() }
 
     }
@@ -85,6 +84,7 @@ class SpeakerInfoActivity : AppCompatActivity() {
         }
 
         speaker.lecture?.let {
+            lecture.visibility = View.VISIBLE
             topic.text = it.topic
             room.text = it.room
             track.text = it.track
