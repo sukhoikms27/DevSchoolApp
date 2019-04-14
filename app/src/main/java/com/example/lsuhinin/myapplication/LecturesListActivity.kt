@@ -13,7 +13,7 @@ import com.example.lsuhinin.myapplication.pojo.lectures
 class LecturesListActivity : AppCompatActivity() {
 
     lateinit var lecturesRecyclerView: RecyclerView
-    lateinit var lecturesAdapter: LecturesAdapter
+    private lateinit var lecturesAdapter: LecturesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

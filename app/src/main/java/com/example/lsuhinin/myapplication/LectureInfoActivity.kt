@@ -45,7 +45,23 @@ class LectureInfoActivity : AppCompatActivity() {
 
     fun displayLectureInfo(lecture: Lecture) {
         topic.text = lecture.topic
-        track.text = lecture.track
+        track.let {
+            when (lecture.track) {
+                "Android" -> {
+                    it.text = lecture.track
+                    it.setBackgroundResource(R.color.coral)
+                }
+                "Frontend" -> {
+                    it.text = lecture.track
+                    it.setBackgroundResource(R.color.prismatic_blue)
+                }
+                "Common" -> {
+                    it.text = lecture.track
+                    it.setBackgroundResource(R.color.violet)
+                }
+            }
+        }
+
         author.text = lecture.speaker.name
         description.text = lecture.description
     }

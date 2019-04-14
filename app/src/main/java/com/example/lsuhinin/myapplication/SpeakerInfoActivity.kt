@@ -80,12 +80,10 @@ class SpeakerInfoActivity : AppCompatActivity() {
         }
         lecture.speaker.social.twitter?.let {
             twitter.visibility = View.VISIBLE
-//            startActivity(Intent(Intent.ACTION_VIEW).setData(Uri.parse(speaker.social.twitter)))
             twitter.setOnClickListener { Toast.makeText(this@SpeakerInfoActivity, lecture.speaker.social.twitter, Toast.LENGTH_SHORT).show() }
         }
         lecture.speaker.social.telegram?.let {
             telegram.visibility = View.VISIBLE
-//            startActivity(Intent(Intent.ACTION_VIEW).setData(Uri.parse(speaker.social.telegram)))
             telegram.setOnClickListener { Toast.makeText(this@SpeakerInfoActivity, lecture.speaker.social.telegram, Toast.LENGTH_SHORT).show() }
         }
 
@@ -94,7 +92,22 @@ class SpeakerInfoActivity : AppCompatActivity() {
                 lectureInfo.visibility = View.VISIBLE
                 topic.text = lecture.topic
                 room.text = lecture.room
-                track.text = lecture.track
+                track.let {
+                    when (lecture.track) {
+                        "Android" -> {
+                            it.text = lecture.track
+                            it.setBackgroundResource(R.color.coral)
+                        }
+                        "Frontend" -> {
+                            it.text = lecture.track
+                            it.setBackgroundResource(R.color.prismatic_blue)
+                        }
+                        "Common" -> {
+                            it.text = lecture.track
+                            it.setBackgroundResource(R.color.violet)
+                        }
+                    }
+                }
                 time.text = lecture.time
                 date.text = lecture.date
             }
@@ -103,6 +116,7 @@ class SpeakerInfoActivity : AppCompatActivity() {
 
     fun openLectureInfoActivity() {
         val lectureInfoActivityIntent = Intent(this@SpeakerInfoActivity, LectureInfoActivity::class.java)
+        lectureInfoActivityIntent.putExtra(LectureInfoActivity().LECTURE_ID, lecture.id)
         startActivity(lectureInfoActivityIntent)
     }
 }

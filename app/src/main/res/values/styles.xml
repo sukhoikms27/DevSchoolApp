@@ -21,6 +21,10 @@
         <item name="android:textAppearance">@style/Text.Secondary</item>
     </style>
 
+    <style name="TextView.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="TextView.Secondary.Stylished">
         <item name="android:textColor">@color/persidian_blue</item>
     </style>
@@ -51,7 +55,6 @@
     </style>
 
     <style name="TextView.Chips">
-        <item name="android:background">@color/colorAccent</item>
         <item name="android:textAppearance">@style/Button</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textAlignment">center</item>

@@ -36,12 +36,14 @@
         <TextView
             android:id="@+id/speakerName"
             style="@style/Text.Primary"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/small_margin_size"
             android:text="@string/Author"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/speakerPhoto"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_default="spread" />
 
         <TextView
             android:id="@+id/speakerJob"
