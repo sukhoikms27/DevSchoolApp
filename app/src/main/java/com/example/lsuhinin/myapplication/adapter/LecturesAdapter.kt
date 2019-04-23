@@ -1,8 +1,5 @@
 package com.example.lsuhinin.myapplication.adapter
 
-import android.annotation.SuppressLint
-import android.app.PendingIntent.getActivity
-import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -83,7 +80,6 @@ class LecturesAdapter(onLectureClickListener: OnLectureClickListener) : Recycler
                 speakerJobInfoTextView.text = it.job
                 speakerLocationTextView.text = it.location
             }
-
         }
     }
 

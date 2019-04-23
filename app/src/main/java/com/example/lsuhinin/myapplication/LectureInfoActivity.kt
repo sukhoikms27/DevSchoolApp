@@ -35,7 +35,7 @@ class LectureInfoActivity : AppCompatActivity() {
         author = findViewById(R.id.author)
         info = findViewById(R.id.info)
 
-        lectureId = intent.extras.get(LECTURE_ID) as Long ?: 1L
+        lectureId = intent.extras.get(LECTURE_ID) as Long
         displayLectureInfo(lectures.single { it.id == lectureId })
 
         allLectures.setOnClickListener { openLecturesActivity() }
