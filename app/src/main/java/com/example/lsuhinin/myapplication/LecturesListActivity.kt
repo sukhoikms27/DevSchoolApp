@@ -2,28 +2,31 @@ package com.example.lsuhinin.myapplication
 
 import android.content.Intent
 import android.os.AsyncTask
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.SystemClock.sleep
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.widget.Toast
 import com.example.lsuhinin.myapplication.adapter.LecturesAdapter
 import com.example.lsuhinin.myapplication.pojo.Lecture
 import com.example.lsuhinin.myapplication.pojo.lectures
+import com.faltenreich.skeletonlayout.Skeleton
+import com.faltenreich.skeletonlayout.applySkeleton
 
 class LecturesListActivity : AppCompatActivity() {
 
     lateinit var lecturesRecyclerView: RecyclerView
     private lateinit var lecturesAdapter: LecturesAdapter
+    private lateinit var skeleton: Skeleton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.lectures_list_activity)
         initRecyclerView()
-        LecturesListAsyncTask().execute()
 
+        LecturesListAsyncTask().execute()
     }
 
     fun initRecyclerView() {
@@ -43,6 +46,7 @@ class LecturesListActivity : AppCompatActivity() {
         lecturesRecyclerView.adapter = lecturesAdapter
     }
 
+    //TODO выпилить
     fun loadLections() {
         lecturesAdapter.setItems(lectures)
     }
@@ -51,21 +55,20 @@ class LecturesListActivity : AppCompatActivity() {
 
         override fun onPreExecute() {
             super.onPreExecute()
-            Toast.makeText(this@LecturesListActivity, "Legen...", Toast.LENGTH_SHORT).show()
-            //turn on skeleton animation
+            skeleton = lecturesRecyclerView.applySkeleton(R.layout.lecture_item_view, 4)
+            skeleton.showSkeleton()
         }
 
         override fun onPostExecute(lectures: Collection<Lecture>?) {
             super.onPostExecute(lectures)
-            //turn off skeleton animation
-            Toast.makeText(this@LecturesListActivity, "...dary", Toast.LENGTH_SHORT).show()
+            skeleton.showOriginal()
             lectures?.let {
                 lecturesAdapter.setItems(it)
             } ?: Toast.makeText(this@LecturesListActivity, R.string.error, Toast.LENGTH_SHORT).show()
         }
 
         override fun doInBackground(vararg p0: Long?): Collection<Lecture> {
-            sleep(5000)
+            sleep(4000)
             return lectures
         }
 
