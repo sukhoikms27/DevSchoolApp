@@ -1,12 +1,11 @@
 package com.example.lsuhinin.myapplication
 
-import android.content.ClipDescription
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.example.lsuhinin.myapplication.pojo.Lecture
 import com.example.lsuhinin.myapplication.pojo.developer
 import com.example.lsuhinin.myapplication.pojo.lectures

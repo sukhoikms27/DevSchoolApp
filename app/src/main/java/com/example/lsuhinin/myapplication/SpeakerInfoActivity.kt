@@ -3,11 +3,11 @@ package com.example.lsuhinin.myapplication
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.lsuhinin.myapplication.pojo.Lecture
 
 class SpeakerInfoActivity : AppCompatActivity() {
@@ -32,7 +32,6 @@ class SpeakerInfoActivity : AppCompatActivity() {
 
     lateinit var lectureInfo: View
     lateinit var lecture: Lecture
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

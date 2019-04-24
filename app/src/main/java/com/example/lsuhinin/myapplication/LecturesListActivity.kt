@@ -2,13 +2,13 @@ package com.example.lsuhinin.myapplication
 
 import android.content.Intent
 import android.os.AsyncTask
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.SystemClock.sleep
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import android.widget.Toast
 import com.example.lsuhinin.myapplication.adapter.LecturesAdapter
 import com.example.lsuhinin.myapplication.pojo.Lecture
 import com.example.lsuhinin.myapplication.pojo.lectures
@@ -64,7 +64,8 @@ class LecturesListActivity : AppCompatActivity() {
             skeleton.showOriginal()
             lectures?.let {
                 lecturesAdapter.setItems(it)
-            } ?: Toast.makeText(this@LecturesListActivity, R.string.error, Toast.LENGTH_SHORT).show()
+            }
+                    ?: Toast.makeText(this@LecturesListActivity, R.string.error, Toast.LENGTH_SHORT).show()
         }
 
         override fun doInBackground(vararg p0: Long?): Collection<Lecture> {

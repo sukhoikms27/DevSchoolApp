@@ -1,107 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<com.faltenreich.skeletonlayout.SkeletonLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.faltenreich.skeletonlayout.SkeletonLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    >
+    android:layout_height="wrap_content">
 
-<androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
 
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="8dp">
-
-    <TextView
-        android:id="@+id/time"
-        style="@style/TextView.Bold"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:padding="@dimen/small_margin_size"
-        android:text="@string/time"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/topic"
-        style="@style/TextView.Primary"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/small_margin_size"
-        android:text="@string/topic"
-        app:layout_constraintStart_toEndOf="@id/time"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBaseline_toBaselineOf="@id/time"/>
+        android:layout_margin="8dp">
 
-    <TextView
-        android:id="@+id/room"
-        style="@style/TextView.Secondary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/small_margin_size"
-        android:text="@string/room"
-        app:layout_constraintStart_toEndOf="@id/time"
-        app:layout_constraintTop_toBottomOf="@id/topic" />
+        <TextView
+            android:id="@+id/time"
+            style="@style/TextView.Bold"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="@dimen/small_margin_size"
+            android:text="@string/time"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/track"
-        style="@style/TextView.Chips"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/small_margin_size"
-        android:text="@string/track"
-        app:layout_constraintStart_toEndOf="@id/time"
-        app:layout_constraintTop_toBottomOf="@id/room" />
+        <TextView
+            android:id="@+id/topic"
+            style="@style/TextView.Primary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/small_margin_size"
+            android:text="@string/topic"
+            app:layout_constraintStart_toEndOf="@id/time"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBaseline_toBaselineOf="@id/time" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/speakerCountry"
-        android:layout_width="37dp"
-        android:layout_height="37dp"
-        android:layout_margin="@dimen/small_margin_size"
-        android:src="@drawable/rus_flag"
-        app:civ_border_color="@color/white"
-        app:civ_border_width="3dp"
-        app:layout_constraintStart_toEndOf="@id/time"
-        app:layout_constraintTop_toBottomOf="@id/track" />
+        <TextView
+            android:id="@+id/room"
+            style="@style/TextView.Secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/small_margin_size"
+            android:text="@string/room"
+            app:layout_constraintStart_toEndOf="@id/time"
+            app:layout_constraintTop_toBottomOf="@id/topic" />
 
-    <TextView
-        android:id="@+id/speakerName"
-        style="@style/TextView.Bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/small_margin_size"
-        android:text="@string/Author"
-        app:layout_constraintStart_toEndOf="@+id/speakerCountry"
-        app:layout_constraintTop_toBottomOf="@+id/track"
-        app:layout_constraintVertical_bias="1.0" />
+        <TextView
+            android:id="@+id/track"
+            style="@style/TextView.Chips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/small_margin_size"
+            android:text="@string/track"
+            app:layout_constraintStart_toEndOf="@id/time"
+            app:layout_constraintTop_toBottomOf="@id/room" />
 
-    <TextView
-        android:id="@+id/speakerLocation"
-        style="@style/TextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/small_margin_size"
-        android:text="@string/job"
-        app:layout_constraintStart_toEndOf="@+id/speakerName"
-        app:layout_constraintTop_toBottomOf="@+id/track"
-        app:layout_constraintVertical_bias="1.0"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/speakerCountry"
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            android:layout_margin="@dimen/small_margin_size"
+            android:src="@drawable/rus_flag"
+            app:civ_border_color="@color/white"
+            app:civ_border_width="3dp"
+            app:layout_constraintStart_toEndOf="@id/time"
+            app:layout_constraintTop_toBottomOf="@id/track" />
 
-    <TextView
-        android:id="@+id/speakerJob"
-        style="@style/TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/small_margin_size"
-        android:layout_marginEnd="@dimen/small_margin_size"
-        android:text="job at location"
-        app:layout_constraintStart_toEndOf="@id/speakerCountry"
-        app:layout_constraintTop_toBottomOf="@id/speakerName" />
+        <TextView
+            android:id="@+id/speakerName"
+            style="@style/TextView.Bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/small_margin_size"
+            android:text="@string/Author"
+            app:layout_constraintStart_toEndOf="@+id/speakerCountry"
+            app:layout_constraintTop_toBottomOf="@+id/track"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/speakerLocation"
+            style="@style/TextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/small_margin_size"
+            android:text="@string/job"
+            app:layout_constraintStart_toEndOf="@+id/speakerName"
+            app:layout_constraintTop_toBottomOf="@+id/track"
+            app:layout_constraintVertical_bias="1.0"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/speakerJob"
+            style="@style/TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_margin_size"
+            android:layout_marginEnd="@dimen/small_margin_size"
+            android:text="job at location"
+            app:layout_constraintStart_toEndOf="@id/speakerCountry"
+            app:layout_constraintTop_toBottomOf="@id/speakerName" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </com.faltenreich.skeletonlayout.SkeletonLayout>
