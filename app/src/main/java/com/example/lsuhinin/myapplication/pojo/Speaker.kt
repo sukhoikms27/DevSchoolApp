@@ -1,25 +1,50 @@
 package com.example.lsuhinin.myapplication.pojo
 
-import com.example.lsuhinin.myapplication.R
+import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 data class Speaker(
-        var id: Long,
-        var imageSrc: Int,
-        var country: Int,
-        var name: String,
-        var job: String,
+        var id: String,
+        var firstName: String,
+        var lastName: String,
         var location: String,
-        var info: String,
-        var social: Social
+        @SerializedName("jobTitle", alternate = ["job"])
+        var jobTitle: String,
+        var company: String,
+        var about: String,
+        var photo: String?,
+        var flagImage: String?,
+        var links: Links
+): Serializable
+
+data class Links(
+        var link: String? = null,
+        var twitter: String? = null,
+        var telegram: String? = null,
+        var github: String? = null
 ) : Serializable
 
-data class Social(
-        var link: String?,
-        var twitter: String?,
-        var telegram: String?
-) : Serializable
+data class Schedule(
+        var talks: Collection<Talk>,
+        var activities: Collection<Activity>
+)
 
+data class Talk(
+        var title: String,
+        var description: String,
+        var room: String,
+        var track: String,
+        var speaker: String,
+        var time: String
+)
+
+data class Activity(
+        var title: String,
+        var time: String
+)
+
+@Deprecated("deprecated")
 data class Lecture(
         var id: Long,
         var topic: String?,
@@ -32,40 +57,50 @@ data class Lecture(
         var visibility: Boolean = true
 ) : Serializable
 
+data class LectureObj(
+        var title: String,
+        var description: String,
+        var room: String,
+        var track: String,
+        var speaker: Speaker?,
+        var time: String
+) : Serializable
+
+
+
 val shishkinEvg: Speaker = Speaker(
-        id = 1L,
-        imageSrc = R.drawable.author,
-        country = R.drawable.rus_flag,
-        name = "Evgeny Shishkin",
-        job = "Android Developer at Aviasales",
+        id = "1L",
+        firstName = "Evgeniy",
+        lastName = "Shishkin",
         location = "St. Petersburg, Russia",
-        info = "Android-разработчик с опытом более 8 лет. Адаптировал телефоны LG под российский рынок, разрабатывал умного ассистента в i-Free и амбициозный аудиогид izi.TRAVEL. В 2016 году присоеденился к команде Aviasales, где разрабатывает приложение Hotellook для поиска лучших цен на отели. Автор популярных android open-source проектов (RobotoTextView, AppMsg, ProgressFragment, Snowfall, MultiBackStack и т.д.)",
-        social = Social(
-                link = "https://about.me/e.shishkin",
-                twitter = null,
-                telegram = null)
+        jobTitle = "Android Developer",
+        company = "Aviasales",
+        about = "Android-разработчик с опытом более 8 лет. Адаптировал телефоны LG под российский рынок, разрабатывал умного ассистента в i-Free и амбициозный аудиогид izi.TRAVEL. В 2016 году присоеденился к команде Aviasales, где разрабатывает приложение Hotellook для поиска лучших цен на отели. Автор популярных android open-source проектов (RobotoTextView, AppMsg, ProgressFragment, Snowfall, MultiBackStack и т.д.)",
+        photo = "https://devfest-spb.com/img/speakers/EvgenyShishkin.jpg",
+        flagImage = "ru",
+        links = Links(
+                link = "https://about.me/e.shishkin"
+        )
 )
 
-val developer: Lecture = Lecture(
-        id = 999L,
-        topic = null,
-        description = null,
-        room = null,
-        track = null,
-        time = null,
-        date = null,
-        visibility = false,
+val developer: LectureObj = LectureObj(
+        title = "developer",
+        description = "",
+        room = "",
+        track = "",
+        time = "",
         speaker = Speaker(
-                id = 2L,
-                imageSrc = R.drawable.my_photo,
-                country = R.drawable.rus_flag,
-                name = "Leonid Sukhinin",
-                job = "QA Automation in Mail.Ru",
+                id = "2L",
+                firstName = "Leonid",
+                lastName = "Sukhinin",
+                jobTitle = "QA Automation",
+                company = "Mail.Ru",
                 location = "St. Petersburg, Russia",
-                info = "QA Automation с опытом около 2 лет. Сейчас занимаюсь тестированием в проекте Юла|Авто. Есть сильное желание развиваться в android-разбработку. Пишу на Kotlin :)",
-                social = Social(
+                about = "QA Automation с опытом около 2 лет. Сейчас занимаюсь тестированием в проекте Юла|Авто. Есть сильное желание развиваться в android-разбработку. Пишу на Kotlin :)",
+                photo = "",
+                flagImage = "ru",
+                links = Links(
                         link = "https://github.com/sukhoikms27",
-                        twitter = null,
                         telegram = "@sukhoikms27")
         )
 )

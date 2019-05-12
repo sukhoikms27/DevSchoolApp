@@ -1,14 +1,18 @@
 package com.example.lsuhinin.myapplication
 
 import android.content.Intent
+import android.os.AsyncTask
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.lsuhinin.myapplication.pojo.Lecture
-import com.example.lsuhinin.myapplication.pojo.developer
-import com.example.lsuhinin.myapplication.pojo.lectures
+import com.example.lsuhinin.myapplication.network.DevFestApi
+import com.example.lsuhinin.myapplication.pojo.*
+import com.faltenreich.skeletonlayout.Skeleton
+import com.faltenreich.skeletonlayout.createSkeleton
 
 class LectureInfoActivity : AppCompatActivity() {
 
@@ -19,8 +23,7 @@ class LectureInfoActivity : AppCompatActivity() {
 
     lateinit var allLectures: Button
     lateinit var info: ImageView
-    var lectureId: Long? = 1L
-    val LECTURE_ID = "lectureId"
+    lateinit var lecture: LectureObj
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,34 +37,34 @@ class LectureInfoActivity : AppCompatActivity() {
         author = findViewById(R.id.author)
         info = findViewById(R.id.info)
 
-        lectureId = intent.extras.get(LECTURE_ID) as Long
-        displayLectureInfo(lectures.single { it.id == lectureId })
+        lecture = intent.extras.get("lecture") as LectureObj
+        displayLectureInfo(lecture)
 
         allLectures.setOnClickListener { openLecturesActivity() }
-        author.setOnClickListener { openSpeakerInfoActivity(lectures.single { it.id == lectureId }) }
+        author.setOnClickListener { openSpeakerInfoActivity(lecture) }
         info.setOnClickListener { openSpeakerInfoActivity(developer) }
     }
 
-    fun displayLectureInfo(lecture: Lecture) {
-        topic.text = lecture.topic
+    fun displayLectureInfo(lecture: LectureObj) {
+        topic.text = lecture.title
         track.let {
             when (lecture.track) {
-                "Android" -> {
+                "android" -> {
                     it.text = lecture.track
                     it.setBackgroundResource(R.color.coral)
                 }
-                "Frontend" -> {
+                "frontend" -> {
                     it.text = lecture.track
                     it.setBackgroundResource(R.color.prismatic_blue)
                 }
-                "Common" -> {
+                "common" -> {
                     it.text = lecture.track
                     it.setBackgroundResource(R.color.violet)
                 }
             }
         }
 
-        author.text = lecture.speaker.name
+        author.text = "${lecture.speaker!!.firstName} ${lecture.speaker!!.lastName}" //FIXME разбить на два поля
         description.text = lecture.description
     }
 
@@ -70,7 +73,7 @@ class LectureInfoActivity : AppCompatActivity() {
         startActivity(lecturesListActivityIntent)
     }
 
-    fun openSpeakerInfoActivity(lecture: Lecture) {
+    fun openSpeakerInfoActivity(lecture: LectureObj) {
         val speakerInfoActivityIntent = Intent(this@LectureInfoActivity, SpeakerInfoActivity::class.java)
         speakerInfoActivityIntent.putExtra("speaker", lecture)
         startActivity(speakerInfoActivityIntent)

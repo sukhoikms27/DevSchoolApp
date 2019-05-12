@@ -1,5 +1,7 @@
 package com.example.lsuhinin.myapplication.adapter
 
+import android.os.SystemClock.sleep
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,12 +9,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lsuhinin.myapplication.R
-import com.example.lsuhinin.myapplication.pojo.Lecture
+import com.example.lsuhinin.myapplication.network.DevFestApi
+import com.example.lsuhinin.myapplication.pojo.LectureObj
+import com.example.lsuhinin.myapplication.pojo.Talk
 
 
 class LecturesAdapter(onLectureClickListener: OnLectureClickListener) : RecyclerView.Adapter<LecturesAdapter.LectureViewHolder>() {
 
-    private val lecturesList = ArrayList<Lecture>()
+    private val lecturesList = ArrayList<LectureObj>()
     private val onLectureClickListener = onLectureClickListener
 
     init {
@@ -32,7 +36,7 @@ class LecturesAdapter(onLectureClickListener: OnLectureClickListener) : Recycler
         holder.bind(lecturesList[position])
     }
 
-    fun setItems(lectures: Collection<Lecture>) {
+    fun setItems(lectures: Collection<LectureObj>) {
         lecturesList.addAll(lectures)
         notifyDataSetChanged()
     }
@@ -54,36 +58,36 @@ class LecturesAdapter(onLectureClickListener: OnLectureClickListener) : Recycler
             }
         }
 
-        fun bind(lecture: Lecture) {
+        fun bind(lecture: LectureObj) {
             timeTextView.text = lecture.time
-            topicTextView.text = lecture.topic
+            topicTextView.text = lecture.title
             roomTextView.text = lecture.room
             trackTextView.let {
                 when (lecture.track) {
-                    "Android" -> {
+                    "android" -> {
                         it.text = lecture.track
                         it.setBackgroundResource(R.color.coral)
                     }
-                    "Frontend" -> {
+                    "frontend" -> {
                         it.text = lecture.track
                         it.setBackgroundResource(R.color.prismatic_blue)
                     }
-                    "Common" -> {
+                    "common" -> {
                         it.text = lecture.track
                         it.setBackgroundResource(R.color.violet)
                     }
                 }
             }
-            lecture.speaker.let {
-                speakerNameTextView.text = it.name
-                speakerCountryImageView.setImageResource(it.country)
-                speakerJobInfoTextView.text = it.job
-                speakerLocationTextView.text = it.location
+            lecture.speaker?.let {
+                            speakerNameTextView.text = "${it.firstName.toUpperCase()} ${it.lastName.toUpperCase()}" //FIXME разбить на два поля
+                            speakerCountryImageView.setImageResource(R.drawable.rus_flag) //FIXME прикруть поглощатор урла
+                            speakerJobInfoTextView.text = "${it.jobTitle} at ${it.company}" //FIXME добавить в локали
+                            speakerLocationTextView.text = it.location
             }
         }
     }
 
     interface OnLectureClickListener {
-        fun onLectureClick(lecture: Lecture)
+        fun onLectureClick(lecture: LectureObj)
     }
 }
