@@ -8,8 +8,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.lsuhinin.myapplication.pojo.Lecture
 import com.example.lsuhinin.myapplication.pojo.LectureObj
+import com.google.android.material.chip.Chip
+import com.squareup.picasso.Picasso
 
 class SpeakerInfoActivity : AppCompatActivity() {
 
@@ -27,7 +28,7 @@ class SpeakerInfoActivity : AppCompatActivity() {
 
     lateinit var topic: TextView
     lateinit var room: TextView
-    lateinit var track: TextView
+    lateinit var track: Chip
     lateinit var time: TextView
     lateinit var date: TextView
 
@@ -52,7 +53,6 @@ class SpeakerInfoActivity : AppCompatActivity() {
         room = findViewById(R.id.room)
         track = findViewById(R.id.track)
         time = findViewById(R.id.time)
-        date = findViewById(R.id.date)
         lectureInfo = findViewById(R.id.lecture_info)
 
         lecture = intent.extras.getSerializable("speaker") as LectureObj
@@ -64,7 +64,8 @@ class SpeakerInfoActivity : AppCompatActivity() {
     fun displayUserInfo(lecture: LectureObj) {
 
         lecture.speaker?.let { speaker ->
-            speakerPhoto.setImageResource(R.drawable.my_photo)         //FIXME прикруть поглощатор урла
+            speakerPhoto.setImageResource(R.drawable.my_photo) //FIXME прикруть поглощатор урла
+            Picasso.get().load(speaker.photo).into(speakerPhoto)
             speakerCountry.setImageResource(R.drawable.rus_flag)         //FIXME прикруть поглощатор урла
             speakerName.text = "${speaker.firstName.toUpperCase()} ${speaker.lastName.toUpperCase()}" //FIXME разбить на два поля
             speakerJob.text = "${speaker.jobTitle} at ${speaker.company}" //FIXME добавить в локали
@@ -91,20 +92,20 @@ class SpeakerInfoActivity : AppCompatActivity() {
             lecture.let {
                 lectureInfo.visibility = View.VISIBLE
                 topic.text = lecture.title
-                room.text = lecture.room
+                room.text = "Room ${lecture.room}"
                 track.let {
                     when (lecture.track) {
                         "android" -> {
-                            it.text = lecture.track
-                            it.setBackgroundResource(R.color.coral)
+                            it.text = "Android"
+                            it.setChipIconResource(R.drawable.shape_oval_coral)
                         }
                         "frontend" -> {
-                            it.text = lecture.track
-                            it.setBackgroundResource(R.color.prismatic_blue)
+                            it.text = "Frontend"
+                            it.setChipIconResource(R.drawable.shape_oval_prismatic_blue)
                         }
                         "common" -> {
-                            it.text = lecture.track
-                            it.setBackgroundResource(R.color.violet)
+                            it.text = "Common"
+                            it.setChipIconResource(R.drawable.shape_oval_violet)
                         }
                     }
                 }

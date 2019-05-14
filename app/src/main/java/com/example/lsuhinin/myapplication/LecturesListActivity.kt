@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lsuhinin.myapplication.adapter.LecturesAdapter
-import com.example.lsuhinin.myapplication.network.DevFestApi
-import com.example.lsuhinin.myapplication.network.getLectures
+import com.example.lsuhinin.myapplication.api.getLectures
+import com.example.lsuhinin.myapplication.network.Retrofit
 import com.example.lsuhinin.myapplication.pojo.LectureObj
 import com.faltenreich.skeletonlayout.Skeleton
 import com.faltenreich.skeletonlayout.applySkeleton
@@ -31,7 +31,7 @@ class LecturesListActivity : AppCompatActivity() {
 
     fun initRecyclerView() {
         lecturesRecyclerView = findViewById(R.id.lectures_recycler_view)
-        lecturesRecyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+//        lecturesRecyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         lecturesRecyclerView.layoutManager = LinearLayoutManager(this)
 
         val onLectureClickListener = object : LecturesAdapter.OnLectureClickListener {
@@ -63,10 +63,11 @@ class LecturesListActivity : AppCompatActivity() {
                     ?: Toast.makeText(this@LecturesListActivity, R.string.error, Toast.LENGTH_SHORT).show()
         }
 
-        override fun doInBackground(vararg p0: Long?): Collection<LectureObj> {
-            val response = DevFestApi.create().getResponse().execute().body()
-            return getLectures(response!!)
+        override fun doInBackground(vararg p0: Long?): Collection<LectureObj>? {
+            val response = Retrofit.getInstance().getResponse().execute().body()
+            return response?.let { getLectures(it) }
         }
+
 
     }
 }

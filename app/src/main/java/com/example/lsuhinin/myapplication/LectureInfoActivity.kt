@@ -1,23 +1,18 @@
 package com.example.lsuhinin.myapplication
 
 import android.content.Intent
-import android.os.AsyncTask
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.lsuhinin.myapplication.network.DevFestApi
 import com.example.lsuhinin.myapplication.pojo.*
-import com.faltenreich.skeletonlayout.Skeleton
-import com.faltenreich.skeletonlayout.createSkeleton
+import com.google.android.material.chip.Chip
 
 class LectureInfoActivity : AppCompatActivity() {
 
     lateinit var topic: TextView
-    lateinit var track: TextView
+    lateinit var track: Chip
     lateinit var author: TextView
     lateinit var description: TextView
 
@@ -50,16 +45,16 @@ class LectureInfoActivity : AppCompatActivity() {
         track.let {
             when (lecture.track) {
                 "android" -> {
-                    it.text = lecture.track
-                    it.setBackgroundResource(R.color.coral)
+                    it.text = "Android"
+                    it.setChipIconResource(R.drawable.shape_oval_coral)
                 }
                 "frontend" -> {
-                    it.text = lecture.track
-                    it.setBackgroundResource(R.color.prismatic_blue)
+                    it.text = "Frontend"
+                    it.setChipIconResource(R.drawable.shape_oval_prismatic_blue)
                 }
                 "common" -> {
-                    it.text = lecture.track
-                    it.setBackgroundResource(R.color.violet)
+                    it.text = "Common"
+                    it.setChipIconResource(R.drawable.shape_oval_violet)
                 }
             }
         }

@@ -38,7 +38,7 @@
             style="@style/Text.Primary"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/small_margin_size"
+            android:layout_marginStart="@dimen/middle_margin_size"
             android:text="@string/Author"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/speakerPhoto"
@@ -50,7 +50,7 @@
             style="@style/Text.Stylished"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/small_margin_size"
+            android:layout_marginStart="@dimen/middle_margin_size"
             android:text="@string/job"
             app:layout_constraintStart_toEndOf="@id/speakerPhoto"
             app:layout_constraintTop_toBottomOf="@id/speakerName" />
@@ -60,7 +60,7 @@
             style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/small_margin_size"
+            android:layout_marginStart="@dimen/middle_margin_size"
             android:text="@string/location"
             app:layout_constraintStart_toEndOf="@id/speakerPhoto"
             app:layout_constraintTop_toBottomOf="@+id/speakerJob" />
@@ -69,7 +69,7 @@
             android:id="@+id/telegram"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_margin="@dimen/small_margin_size"
+            android:layout_margin="@dimen/middle_margin_size"
             android:src="@drawable/ic_telegram"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/speakerPhoto"
@@ -79,7 +79,7 @@
             android:id="@+id/twitter"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_margin="@dimen/small_margin_size"
+            android:layout_margin="@dimen/middle_margin_size"
             android:src="@drawable/ic_twitter"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/speakerPhoto"
@@ -89,7 +89,7 @@
             android:id="@+id/link"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_margin="@dimen/small_margin_size"
+            android:layout_margin="@dimen/middle_margin_size"
             android:src="@drawable/ic_link_variant"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/speakerPhoto"
@@ -100,7 +100,7 @@
             style="@style/TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_margin_size"
+            android:layout_marginTop="@dimen/middle_margin_size"
             android:text="@string/about"
             app:layout_constraintTop_toBottomOf="@id/speakerPhoto" />
 
@@ -130,18 +130,21 @@
             style="@style/TextView.Secondary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_margin_size"
+            android:layout_marginTop="@dimen/middle_margin_size"
             android:text="@string/room"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/topic" />
 
-        <TextView
+        <com.google.android.material.chip.Chip
             android:id="@+id/track"
             style="@style/TextView.Chips"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_margin_size"
             android:text="@string/track"
+            app:chipIcon="@drawable/shape_oval_coral"
+            android:layout_marginTop="@dimen/middle_margin_size"
+            app:chipIconSize="12dp"
+            app:iconStartPadding="@dimen/small_margin_size"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/room" />
 
@@ -150,20 +153,11 @@
             style="@style/Text.Primary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_margin_size"
+            android:layout_marginTop="@dimen/middle_margin_size"
             android:text="@string/time"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/track" />
 
-        <TextView
-            android:id="@+id/date"
-            style="@style/Text.Stylished"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:text="@string/date"
-            app:layout_constraintBaseline_toBaselineOf="@id/time"
-            app:layout_constraintStart_toEndOf="@id/time" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

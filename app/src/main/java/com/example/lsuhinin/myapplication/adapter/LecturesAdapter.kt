@@ -1,5 +1,7 @@
 package com.example.lsuhinin.myapplication.adapter
 
+import android.content.Context
+import android.content.res.ColorStateList
 import android.os.SystemClock.sleep
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,11 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lsuhinin.myapplication.R
-import com.example.lsuhinin.myapplication.network.DevFestApi
 import com.example.lsuhinin.myapplication.pojo.LectureObj
 import com.example.lsuhinin.myapplication.pojo.Talk
+import com.google.android.material.chip.Chip
+import com.google.android.material.resources.MaterialResources.getColorStateList
 
 
 class LecturesAdapter(onLectureClickListener: OnLectureClickListener) : RecyclerView.Adapter<LecturesAdapter.LectureViewHolder>() {
@@ -46,11 +50,9 @@ class LecturesAdapter(onLectureClickListener: OnLectureClickListener) : Recycler
         private val timeTextView: TextView get() = itemView.findViewById(R.id.time)
         private val topicTextView: TextView get() = itemView.findViewById(R.id.topic)
         private val roomTextView: TextView get() = itemView.findViewById(R.id.room)
-        private val trackTextView: TextView get() = itemView.findViewById(R.id.track)
-        private val speakerCountryImageView: ImageView get() = itemView.findViewById(R.id.speakerCountry)
+        private val trackTextView: Chip get() = itemView.findViewById(R.id.track)
         private val speakerNameTextView: TextView get() = itemView.findViewById(R.id.speakerName)
         private val speakerJobInfoTextView: TextView get() = itemView.findViewById(R.id.speakerJob)
-        private val speakerLocationTextView: TextView get() = itemView.findViewById(R.id.speakerLocation)
 
         init {
             itemView.setOnClickListener {
@@ -61,28 +63,28 @@ class LecturesAdapter(onLectureClickListener: OnLectureClickListener) : Recycler
         fun bind(lecture: LectureObj) {
             timeTextView.text = lecture.time
             topicTextView.text = lecture.title
-            roomTextView.text = lecture.room
+            roomTextView.text = "Room ${lecture.room}"
             trackTextView.let {
                 when (lecture.track) {
                     "android" -> {
-                        it.text = lecture.track
-                        it.setBackgroundResource(R.color.coral)
+                        it.text = "Android"
+                        it.setChipIconResource(R.drawable.shape_oval_coral)
                     }
                     "frontend" -> {
-                        it.text = lecture.track
-                        it.setBackgroundResource(R.color.prismatic_blue)
+                        it.text = "Frontend"
+                        it.setChipIconResource(R.drawable.shape_oval_prismatic_blue)
                     }
                     "common" -> {
-                        it.text = lecture.track
-                        it.setBackgroundResource(R.color.violet)
+                        it.text = "Common"
+                        it.setChipIconResource(R.drawable.shape_oval_violet)
                     }
                 }
             }
             lecture.speaker?.let {
-                            speakerNameTextView.text = "${it.firstName.toUpperCase()} ${it.lastName.toUpperCase()}" //FIXME разбить на два поля
-                            speakerCountryImageView.setImageResource(R.drawable.rus_flag) //FIXME прикруть поглощатор урла
+                            speakerNameTextView.text = "${it.firstName} ${it.lastName}" //FIXME разбить на два поля
+//                            speakerCountryImageView.setImageResource(R.drawable.rus_flag) //FIXME прикруть поглощатор урла
                             speakerJobInfoTextView.text = "${it.jobTitle} at ${it.company}" //FIXME добавить в локали
-                            speakerLocationTextView.text = it.location
+//                            speakerLocationTextView.text = it.location
             }
         }
     }
