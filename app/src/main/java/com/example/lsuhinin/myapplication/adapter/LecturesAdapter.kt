@@ -1,26 +1,18 @@
 package com.example.lsuhinin.myapplication.adapter
 
-import android.content.Context
-import android.content.res.ColorStateList
-import android.os.SystemClock.sleep
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lsuhinin.myapplication.R
-import com.example.lsuhinin.myapplication.pojo.LectureObj
-import com.example.lsuhinin.myapplication.pojo.Talk
+import com.example.lsuhinin.myapplication.pojo.Lecture
 import com.google.android.material.chip.Chip
-import com.google.android.material.resources.MaterialResources.getColorStateList
 
 
 class LecturesAdapter(onLectureClickListener: OnLectureClickListener) : RecyclerView.Adapter<LecturesAdapter.LectureViewHolder>() {
 
-    private val lecturesList = ArrayList<LectureObj>()
+    private val lecturesList = ArrayList<Lecture>()
     private val onLectureClickListener = onLectureClickListener
 
     init {
@@ -40,7 +32,7 @@ class LecturesAdapter(onLectureClickListener: OnLectureClickListener) : Recycler
         holder.bind(lecturesList[position])
     }
 
-    fun setItems(lectures: Collection<LectureObj>) {
+    fun setItems(lectures: Collection<Lecture>) {
         lecturesList.addAll(lectures)
         notifyDataSetChanged()
     }
@@ -51,7 +43,7 @@ class LecturesAdapter(onLectureClickListener: OnLectureClickListener) : Recycler
         private val topicTextView: TextView get() = itemView.findViewById(R.id.topic)
         private val roomTextView: TextView get() = itemView.findViewById(R.id.room)
         private val trackTextView: Chip get() = itemView.findViewById(R.id.track)
-        private val speakerNameTextView: TextView get() = itemView.findViewById(R.id.speakerName)
+        private val speakerNameTextView: TextView get() = itemView.findViewById(R.id.speaker_first_name)
         private val speakerJobInfoTextView: TextView get() = itemView.findViewById(R.id.speakerJob)
 
         init {
@@ -60,7 +52,7 @@ class LecturesAdapter(onLectureClickListener: OnLectureClickListener) : Recycler
             }
         }
 
-        fun bind(lecture: LectureObj) {
+        fun bind(lecture: Lecture) {
             timeTextView.text = lecture.time
             topicTextView.text = lecture.title
             roomTextView.text = "Room ${lecture.room}"
@@ -80,16 +72,19 @@ class LecturesAdapter(onLectureClickListener: OnLectureClickListener) : Recycler
                     }
                 }
             }
-            lecture.speaker?.let {
-                            speakerNameTextView.text = "${it.firstName} ${it.lastName}" //FIXME разбить на два поля
+            lecture.speaker?.let {speaker ->
+                            speakerNameTextView.text = "${speaker.firstName} ${speaker.lastName}" //FIXME разбить на два поля
 //                            speakerCountryImageView.setImageResource(R.drawable.rus_flag) //FIXME прикруть поглощатор урла
-                            speakerJobInfoTextView.text = "${it.jobTitle} at ${it.company}" //FIXME добавить в локали
+                            speakerJobInfoTextView.text =  if (speaker.company != "") { "${speaker.jobTitle} at ${speaker.company}" } else {
+                                speaker.jobTitle
+                            }
+//                + takeIf { speaker.company != "" }.apply { " at ${speaker.company}" } //FIXME добавить в локали
 //                            speakerLocationTextView.text = it.location
             }
         }
     }
 
     interface OnLectureClickListener {
-        fun onLectureClick(lecture: LectureObj)
+        fun onLectureClick(lecture: Lecture)
     }
 }

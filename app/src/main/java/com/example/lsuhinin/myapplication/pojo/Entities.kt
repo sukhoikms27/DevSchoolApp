@@ -15,13 +15,13 @@ data class Speaker(
         var photo: String?,
         var flagImage: String?,
         var links: Links
-): Serializable
+) : Serializable
 
 data class Links(
-        var link: String? = null,
-        var twitter: String? = null,
-        var telegram: String? = null,
-        var github: String? = null
+        var link: String?,
+        var twitter: String?,
+        var telegram: String?,
+        var github: String?
 ) : Serializable
 
 data class Schedule(
@@ -43,7 +43,7 @@ data class Activity(
         var time: String
 )
 
-data class LectureObj(
+data class Lecture(
         var title: String,
         var description: String,
         var room: String,
@@ -52,8 +52,8 @@ data class LectureObj(
         var time: String
 ) : Serializable
 
-val developer: LectureObj = LectureObj(
-        title = "developer",
+val DEVELOPER: Lecture = Lecture(
+        title = "DEVELOPER",
         description = "",
         room = "",
         track = "",
@@ -66,11 +66,14 @@ val developer: LectureObj = LectureObj(
                 company = "Mail.Ru",
                 location = "St. Petersburg, Russia",
                 about = "QA Automation с опытом около 2 лет. Сейчас занимаюсь тестированием в проекте Юла|Авто. Есть сильное желание развиваться в android-разбработку. Пишу на Kotlin :)",
-                photo = "",
+                photo = "https://pp.userapi.com/c849420/v849420980/d27fa/hxuneocDiM8.jpg?ava=1",
                 flagImage = "ru",
                 links = Links(
                         link = "https://github.com/sukhoikms27",
-                        telegram = "@sukhoikms27")
+                        telegram = "https://t.me/sukhoikms27",
+                        github = null,
+                        twitter = null
+                )
         )
 )
 

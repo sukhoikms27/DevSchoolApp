@@ -18,7 +18,7 @@ class LectureInfoActivity : AppCompatActivity() {
 
     lateinit var allLectures: Button
     lateinit var info: ImageView
-    lateinit var lecture: LectureObj
+    lateinit var lecture: Lecture
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,15 +32,15 @@ class LectureInfoActivity : AppCompatActivity() {
         author = findViewById(R.id.author)
         info = findViewById(R.id.info)
 
-        lecture = intent.extras.get("lecture") as LectureObj
+        lecture = intent.extras.get("lecture") as Lecture
         displayLectureInfo(lecture)
 
         allLectures.setOnClickListener { openLecturesActivity() }
         author.setOnClickListener { openSpeakerInfoActivity(lecture) }
-        info.setOnClickListener { openSpeakerInfoActivity(developer) }
+        info.setOnClickListener { openSpeakerInfoActivity(DEVELOPER) }
     }
 
-    fun displayLectureInfo(lecture: LectureObj) {
+    fun displayLectureInfo(lecture: Lecture) {
         topic.text = lecture.title
         track.let {
             when (lecture.track) {
@@ -68,7 +68,7 @@ class LectureInfoActivity : AppCompatActivity() {
         startActivity(lecturesListActivityIntent)
     }
 
-    fun openSpeakerInfoActivity(lecture: LectureObj) {
+    fun openSpeakerInfoActivity(lecture: Lecture) {
         val speakerInfoActivityIntent = Intent(this@LectureInfoActivity, SpeakerInfoActivity::class.java)
         speakerInfoActivityIntent.putExtra("speaker", lecture)
         startActivity(speakerInfoActivityIntent)

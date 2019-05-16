@@ -1,7 +1,7 @@
 package com.example.lsuhinin.myapplication.api
 
 import com.example.lsuhinin.myapplication.network.Response
-import com.example.lsuhinin.myapplication.pojo.LectureObj
+import com.example.lsuhinin.myapplication.pojo.Lecture
 import retrofit2.Call
 import retrofit2.http.GET
 
@@ -12,13 +12,13 @@ interface DevFestApi {
 
 }
 
-fun getLectures(response: Response): Collection<LectureObj>? {
+fun getLectures(response: Response): Collection<Lecture>? {
     val talks = response.schedule.talks
     val speakers = response.speakers
-    var lectures: Collection<LectureObj>
+    var lectures: Collection<Lecture>
 
     lectures = talks.map { talk ->
-        LectureObj(
+        Lecture(
                 title = talk.title,
                 description = talk.description,
                 room = talk.room,

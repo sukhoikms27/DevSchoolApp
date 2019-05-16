@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:text="@string/track"
         app:chipIcon="@drawable/shape_oval_coral"
-        android:layout_marginTop="@dimen/middle_margin_size"
+        android:layout_marginTop="@dimen/medium_margin_size"
         app:chipIconSize="12dp"
         app:iconStartPadding="@dimen/small_margin_size"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,6 +70,6 @@
         app:layout_constraintBottom_toBottomOf="@id/allLectures"
         app:layout_constraintEnd_toEndOf="parent"
         android:src="@drawable/ic_information"
-        android:layout_margin="@dimen/middle_margin_size" />
+        android:layout_margin="@dimen/medium_margin_size" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

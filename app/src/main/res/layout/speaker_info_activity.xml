@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/speaker_info_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_weight="1">
@@ -17,9 +19,11 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/speakerPhoto"
-            android:layout_width="160dp"
-            android:layout_height="160dp"
+            android:layout_width="134dp"
+            android:layout_height="134dp"
+            android:foregroundGravity="center"
             android:src="@drawable/author"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,75 +38,89 @@
             app:layout_constraintEnd_toEndOf="@id/speakerPhoto" />
 
         <TextView
-            android:id="@+id/speakerName"
+            android:id="@+id/speaker_first_name"
             style="@style/Text.Primary"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/middle_margin_size"
+            android:layout_marginTop="@dimen/medium_margin_size"
             android:text="@string/Author"
+
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/speakerPhoto"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_default="spread" />
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintTop_toBottomOf="@id/speakerPhoto" />
 
         <TextView
             android:id="@+id/speakerJob"
             style="@style/Text.Stylished"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/middle_margin_size"
+            android:layout_marginStart="@dimen/medium_margin_size"
             android:text="@string/job"
-            app:layout_constraintStart_toEndOf="@id/speakerPhoto"
-            app:layout_constraintTop_toBottomOf="@id/speakerName" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/speaker_first_name" />
 
         <TextView
             android:id="@+id/speakerLocation"
             style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/middle_margin_size"
+            android:layout_marginStart="@dimen/medium_margin_size"
             android:text="@string/location"
-            app:layout_constraintStart_toEndOf="@id/speakerPhoto"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/speakerJob" />
 
-        <ImageView
-            android:id="@+id/telegram"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_margin="@dimen/middle_margin_size"
-            android:src="@drawable/ic_telegram"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@id/speakerPhoto"
-            app:layout_constraintStart_toEndOf="@id/speakerPhoto" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/social"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/medium_margin_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/speakerLocation">
 
-        <ImageView
-            android:id="@+id/twitter"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_margin="@dimen/middle_margin_size"
-            android:src="@drawable/ic_twitter"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@id/speakerPhoto"
-            app:layout_constraintStart_toEndOf="@id/telegram" />
+            <ImageView
+                android:id="@+id/telegram"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_margin="@dimen/medium_margin_size"
+                android:src="@drawable/ic_telegram"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent" />
 
-        <ImageView
-            android:id="@+id/link"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_margin="@dimen/middle_margin_size"
-            android:src="@drawable/ic_link_variant"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@id/speakerPhoto"
-            app:layout_constraintStart_toEndOf="@id/twitter" />
+            <ImageView
+                android:id="@+id/twitter"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_margin="@dimen/medium_margin_size"
+                android:src="@drawable/ic_twitter"
+                android:visibility="gone"
+                app:layout_constraintStart_toEndOf="@id/telegram" />
+
+            <ImageView
+                android:id="@+id/link"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_margin="@dimen/medium_margin_size"
+                android:src="@drawable/ic_link_variant"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/twitter" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <TextView
-            android:id="@+id/speakerInfo"
+            android:id="@+id/speaker_info"
             style="@style/TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/middle_margin_size"
+            android:layout_marginTop="@dimen/medium_margin_size"
+            android:lineSpacingMultiplier="1.2"
             android:text="@string/about"
-            app:layout_constraintTop_toBottomOf="@id/speakerPhoto" />
+            app:layout_constraintTop_toBottomOf="@id/social" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -130,7 +148,7 @@
             style="@style/TextView.Secondary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/middle_margin_size"
+            android:layout_marginTop="@dimen/medium_margin_size"
             android:text="@string/room"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/topic" />
@@ -140,9 +158,9 @@
             style="@style/TextView.Chips"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium_margin_size"
             android:text="@string/track"
             app:chipIcon="@drawable/shape_oval_coral"
-            android:layout_marginTop="@dimen/middle_margin_size"
             app:chipIconSize="12dp"
             app:iconStartPadding="@dimen/small_margin_size"
             app:layout_constraintStart_toStartOf="parent"
@@ -153,7 +171,7 @@
             style="@style/Text.Primary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/middle_margin_size"
+            android:layout_marginTop="@dimen/medium_margin_size"
             android:text="@string/time"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/track" />

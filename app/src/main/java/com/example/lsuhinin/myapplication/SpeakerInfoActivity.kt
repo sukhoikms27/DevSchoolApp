@@ -6,71 +6,68 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.lsuhinin.myapplication.pojo.LectureObj
+import com.example.lsuhinin.myapplication.pojo.Lecture
 import com.google.android.material.chip.Chip
 import com.squareup.picasso.Picasso
 
 class SpeakerInfoActivity : AppCompatActivity() {
 
-    lateinit var speakerPhoto: ImageView
-    lateinit var speakerCountry: ImageView
-    lateinit var speakerName: TextView
-    lateinit var speakerJob: TextView
-    lateinit var speakerLocation: TextView
+    lateinit var speakerPhotoView: ImageView
+    lateinit var speakerCountryView: ImageView
+    lateinit var speakerNameView: TextView
+    lateinit var speakerJobView: TextView
+    lateinit var speakerLocationView: TextView
 
     lateinit var telegram: ImageView
     lateinit var link: ImageView
     lateinit var twitter: ImageView
 
-    lateinit var speakerInfo: TextView
+    lateinit var speakerInfoView: TextView
 
     lateinit var topic: TextView
     lateinit var room: TextView
     lateinit var track: Chip
     lateinit var time: TextView
-    lateinit var date: TextView
 
     lateinit var lectureInfo: View
-    lateinit var lecture: LectureObj
+    lateinit var lecture: Lecture
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.speaker_info_activity)
 
-        speakerPhoto = findViewById(R.id.speakerPhoto)
-        speakerCountry = findViewById(R.id.speakerCountry)
-        speakerName = findViewById(R.id.speakerName)
-        speakerJob = findViewById(R.id.speakerJob)
-        speakerLocation = findViewById(R.id.speakerLocation)
+        speakerPhotoView = findViewById(R.id.speakerPhoto)
+        speakerCountryView = findViewById(R.id.speakerCountry)
+        speakerNameView = findViewById(R.id.speaker_first_name)
+        speakerJobView = findViewById(R.id.speakerJob)
+        speakerLocationView = findViewById(R.id.speakerLocation)
         link = findViewById(R.id.link)
         telegram = findViewById(R.id.telegram)
         twitter = findViewById(R.id.twitter)
-        speakerInfo = findViewById(R.id.speakerInfo)
+        speakerInfoView = findViewById(R.id.speaker_info)
         topic = findViewById(R.id.topic)
         room = findViewById(R.id.room)
         track = findViewById(R.id.track)
         time = findViewById(R.id.time)
         lectureInfo = findViewById(R.id.lecture_info)
 
-        lecture = intent.extras.getSerializable("speaker") as LectureObj
+        lecture = intent.extras.getSerializable("speaker") as Lecture
         displayUserInfo(lecture)
         lectureInfo.setOnClickListener { openLectureInfoActivity() }
 
     }
 
-    fun displayUserInfo(lecture: LectureObj) {
+    fun displayUserInfo(lecture: Lecture) {
 
         lecture.speaker?.let { speaker ->
-            speakerPhoto.setImageResource(R.drawable.my_photo) //FIXME прикруть поглощатор урла
-            Picasso.get().load(speaker.photo).into(speakerPhoto)
-            speakerCountry.setImageResource(R.drawable.rus_flag)         //FIXME прикруть поглощатор урла
-            speakerName.text = "${speaker.firstName.toUpperCase()} ${speaker.lastName.toUpperCase()}" //FIXME разбить на два поля
-            speakerJob.text = "${speaker.jobTitle} at ${speaker.company}" //FIXME добавить в локали
-            speakerLocation.text = speaker.location
-            speakerInfo.text = speaker.about
+            Picasso.get().load(speaker.photo).into(speakerPhotoView)
+            speakerCountryView.setImageResource(R.drawable.rus_flag)         //FIXME прикруть поглощатор урла
+            speakerNameView.text = "${speaker.firstName.toUpperCase()} ${speaker.lastName.toUpperCase()}" //FIXME разбить на два поля
+            speakerJobView.text = if (speaker.company != "") { "${speaker.jobTitle} at ${speaker.company}" } else { speaker.jobTitle } //FIXME добавить в локали
+            speakerLocationView.text = speaker.location
+            speakerInfoView.text = speaker.about
 
             speaker.links.link?.let {
                 link.visibility = View.VISIBLE
@@ -80,15 +77,19 @@ class SpeakerInfoActivity : AppCompatActivity() {
             }
             speaker.links.twitter?.let {
                 twitter.visibility = View.VISIBLE
-                twitter.setOnClickListener { Toast.makeText(this@SpeakerInfoActivity, speaker.links.twitter, Toast.LENGTH_SHORT).show() }
+                twitter.setOnClickListener {
+                    startActivity(Intent(Intent.ACTION_VIEW).setData(Uri.parse(speaker.links.twitter)))
+                }
             }
             speaker.links.telegram?.let {
                 telegram.visibility = View.VISIBLE
-                telegram.setOnClickListener { Toast.makeText(this@SpeakerInfoActivity, speaker.links.telegram, Toast.LENGTH_SHORT).show() }
+                telegram.setOnClickListener {
+                    startActivity(Intent(Intent.ACTION_VIEW).setData(Uri.parse(speaker.links.telegram)))
+                }
             }
         }
 
-        if (lecture.title != "developer") {
+        if (lecture.title != "DEVELOPER") {
             lecture.let {
                 lectureInfo.visibility = View.VISIBLE
                 topic.text = lecture.title
