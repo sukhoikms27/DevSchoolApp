@@ -1,8 +1,12 @@
 package com.example.lsuhinin.myapplication.pojo
 
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
+@Entity
 data class Speaker(
         var id: String,
         var firstName: String,
@@ -14,9 +18,11 @@ data class Speaker(
         var about: String,
         var photo: String?,
         var flagImage: String?,
-        var links: Links
+        @Embedded
+        var links: Links?
 ) : Serializable
 
+@Entity
 data class Links(
         var link: String?,
         var twitter: String?,
@@ -43,11 +49,15 @@ data class Activity(
         var time: String
 )
 
+@Entity
 data class Lecture(
+        @PrimaryKey(autoGenerate = true)
+        var LectureId: Int? = null,
         var title: String,
         var description: String,
         var room: String,
         var track: String,
+        @Embedded
         var speaker: Speaker?,
         var time: String
 ) : Serializable

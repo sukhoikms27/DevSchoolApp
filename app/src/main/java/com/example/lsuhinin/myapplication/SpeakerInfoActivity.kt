@@ -69,22 +69,22 @@ class SpeakerInfoActivity : AppCompatActivity() {
             speakerLocationView.text = speaker.location
             speakerInfoView.text = speaker.about
 
-            speaker.links.link?.let {
+            speaker.links?.link?.let {
                 link.visibility = View.VISIBLE
                 link.setOnClickListener {
-                    startActivity(Intent(Intent.ACTION_VIEW).setData(Uri.parse(speaker.links.link)))
+                    startActivity(Intent(Intent.ACTION_VIEW).setData(Uri.parse(speaker.links?.link)))
                 }
             }
-            speaker.links.twitter?.let {
+            speaker.links?.twitter?.let {
                 twitter.visibility = View.VISIBLE
                 twitter.setOnClickListener {
-                    startActivity(Intent(Intent.ACTION_VIEW).setData(Uri.parse(speaker.links.twitter)))
+                    startActivity(Intent(Intent.ACTION_VIEW).setData(Uri.parse(speaker.links?.twitter)))
                 }
             }
-            speaker.links.telegram?.let {
+            speaker.links?.telegram?.let {
                 telegram.visibility = View.VISIBLE
                 telegram.setOnClickListener {
-                    startActivity(Intent(Intent.ACTION_VIEW).setData(Uri.parse(speaker.links.telegram)))
+                    startActivity(Intent(Intent.ACTION_VIEW).setData(Uri.parse(speaker.links?.telegram)))
                 }
             }
         }

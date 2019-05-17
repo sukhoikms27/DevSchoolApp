@@ -6,7 +6,8 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.lsuhinin.myapplication.pojo.*
+import com.example.lsuhinin.myapplication.pojo.DEVELOPER
+import com.example.lsuhinin.myapplication.pojo.Lecture
 import com.google.android.material.chip.Chip
 
 class LectureInfoActivity : AppCompatActivity() {

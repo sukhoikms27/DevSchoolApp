@@ -3,12 +3,15 @@ package com.example.lsuhinin.myapplication
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
+import android.os.SystemClock.sleep
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lsuhinin.myapplication.adapter.LecturesAdapter
 import com.example.lsuhinin.myapplication.api.getLectures
+import com.example.lsuhinin.myapplication.db.AppDatabase
+import com.example.lsuhinin.myapplication.helpers.isConnectedToInternet
 import com.example.lsuhinin.myapplication.network.Retrofit
 import com.example.lsuhinin.myapplication.pojo.Lecture
 import com.faltenreich.skeletonlayout.Skeleton
@@ -44,6 +47,27 @@ class LecturesListActivity : AppCompatActivity() {
         lecturesRecyclerView.adapter = lecturesAdapter
     }
 
+    fun saveData(lectures: Collection<Lecture>) {
+        val db: AppDatabase? = AppDatabase.getAppDataBase(context = this).apply {
+            this?.let{
+                lectureDao().run {
+                    deleteAllLectures()
+                    insertAll(*lectures.toTypedArray())
+                }
+            }
+        }
+    }
+
+    fun restoreData(): Collection<Lecture> {
+        var db =  AppDatabase.getAppDataBase(context = this)
+        return db?.lectureDao()!!.getAllLectures()
+
+        }
+
+    override fun onDestroy() {
+        super.onDestroy()
+    }
+
     inner class LecturesListAsyncTask : AsyncTask<Long, Int, Collection<Lecture>?>() {
 
         override fun onPreExecute() {
@@ -62,8 +86,13 @@ class LecturesListActivity : AppCompatActivity() {
         }
 
         override fun doInBackground(vararg p0: Long?): Collection<Lecture>? {
+
+            return if(isConnectedToInternet()) {
             val response = Retrofit.getInstance().getResponse().execute().body()
-            return response?.let { getLectures(it) }
+            response?.let { getLectures(it) }.apply {
+                saveData(this!!)
+                return this
+            }} else { restoreData() }
         }
 
 
