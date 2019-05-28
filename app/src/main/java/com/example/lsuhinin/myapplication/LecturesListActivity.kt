@@ -3,7 +3,6 @@ package com.example.lsuhinin.myapplication
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
-import android.os.SystemClock.sleep
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -49,7 +48,7 @@ class LecturesListActivity : AppCompatActivity() {
 
     fun saveData(lectures: Collection<Lecture>) {
         val db: AppDatabase? = AppDatabase.getAppDataBase(context = this).apply {
-            this?.let{
+            this?.let {
                 lectureDao().run {
                     deleteAllLectures()
                     insertAll(*lectures.toTypedArray())
@@ -59,13 +58,14 @@ class LecturesListActivity : AppCompatActivity() {
     }
 
     fun restoreData(): Collection<Lecture> {
-        var db =  AppDatabase.getAppDataBase(context = this)
+        var db = AppDatabase.getAppDataBase(context = this)
         return db?.lectureDao()!!.getAllLectures()
 
-        }
+    }
 
     override fun onDestroy() {
         super.onDestroy()
+        saveData(lecturesAdapter.getItems())
     }
 
     inner class LecturesListAsyncTask : AsyncTask<Long, Int, Collection<Lecture>?>() {
@@ -90,7 +90,6 @@ class LecturesListActivity : AppCompatActivity() {
             return if(isConnectedToInternet()) {
             val response = Retrofit.getInstance().getResponse().execute().body()
             response?.let { getLectures(it) }.apply {
-                saveData(this!!)
                 return this
             }} else { restoreData() }
         }

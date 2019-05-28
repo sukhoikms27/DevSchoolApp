@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lsuhinin.myapplication.R
+import com.example.lsuhinin.myapplication.helpers.setChipData
 import com.example.lsuhinin.myapplication.pojo.Lecture
 import com.google.android.material.chip.Chip
 
@@ -37,6 +38,10 @@ class LecturesAdapter(onLectureClickListener: OnLectureClickListener) : Recycler
         notifyDataSetChanged()
     }
 
+    fun getItems(): Collection<Lecture> {
+        return lecturesList
+    }
+
     inner class LectureViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val timeTextView: TextView get() = itemView.findViewById(R.id.time)
@@ -56,30 +61,13 @@ class LecturesAdapter(onLectureClickListener: OnLectureClickListener) : Recycler
             timeTextView.text = lecture.time
             topicTextView.text = lecture.title
             roomTextView.text = "Room ${lecture.room}"
-            trackTextView.let {
-                when (lecture.track) {
-                    "android" -> {
-                        it.text = "Android"
-                        it.setChipIconResource(R.drawable.shape_oval_coral)
-                    }
-                    "frontend" -> {
-                        it.text = "Frontend"
-                        it.setChipIconResource(R.drawable.shape_oval_prismatic_blue)
-                    }
-                    "common" -> {
-                        it.text = "Common"
-                        it.setChipIconResource(R.drawable.shape_oval_violet)
-                    }
-                }
-            }
+            trackTextView.setChipData(lecture.track)
+
             lecture.speaker?.let {speaker ->
                             speakerNameTextView.text = "${speaker.firstName} ${speaker.lastName}" //FIXME разбить на два поля
-//                            speakerCountryImageView.setImageResource(R.drawable.rus_flag) //FIXME прикруть поглощатор урла
                             speakerJobInfoTextView.text =  if (speaker.company != "") { "${speaker.jobTitle} at ${speaker.company}" } else {
                                 speaker.jobTitle
                             }
-//                + takeIf { speaker.company != "" }.apply { " at ${speaker.company}" } //FIXME добавить в локали
-//                            speakerLocationTextView.text = it.location
             }
         }
     }

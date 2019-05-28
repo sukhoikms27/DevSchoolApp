@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.lsuhinin.myapplication.helpers.setChipData
 import com.example.lsuhinin.myapplication.pojo.Lecture
 import com.google.android.material.chip.Chip
 import com.squareup.picasso.Picasso
@@ -75,6 +76,7 @@ class SpeakerInfoActivity : AppCompatActivity() {
                     startActivity(Intent(Intent.ACTION_VIEW).setData(Uri.parse(speaker.links?.link)))
                 }
             }
+
             speaker.links?.twitter?.let {
                 twitter.visibility = View.VISIBLE
                 twitter.setOnClickListener {
@@ -94,22 +96,7 @@ class SpeakerInfoActivity : AppCompatActivity() {
                 lectureInfo.visibility = View.VISIBLE
                 topic.text = lecture.title
                 room.text = "Room ${lecture.room}"
-                track.let {
-                    when (lecture.track) {
-                        "android" -> {
-                            it.text = "Android"
-                            it.setChipIconResource(R.drawable.shape_oval_coral)
-                        }
-                        "frontend" -> {
-                            it.text = "Frontend"
-                            it.setChipIconResource(R.drawable.shape_oval_prismatic_blue)
-                        }
-                        "common" -> {
-                            it.text = "Common"
-                            it.setChipIconResource(R.drawable.shape_oval_violet)
-                        }
-                    }
-                }
+                track.setChipData(lecture.track)
                 time.text = lecture.time
             }
         }
