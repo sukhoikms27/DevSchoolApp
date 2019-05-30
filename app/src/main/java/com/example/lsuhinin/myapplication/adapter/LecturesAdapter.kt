@@ -6,12 +6,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lsuhinin.myapplication.R
+import com.example.lsuhinin.myapplication.fragments.LecturesListFragment
 import com.example.lsuhinin.myapplication.helpers.setChipData
 import com.example.lsuhinin.myapplication.pojo.Lecture
 import com.google.android.material.chip.Chip
 
 
-class LecturesAdapter(onLectureClickListener: OnLectureClickListener) : RecyclerView.Adapter<LecturesAdapter.LectureViewHolder>() {
+class LecturesAdapter(onLectureClickListener: LecturesListFragment.OnLectureSelected) : RecyclerView.Adapter<LecturesAdapter.LectureViewHolder>() {
 
     private val lecturesList = ArrayList<Lecture>()
     private val onLectureClickListener = onLectureClickListener
@@ -53,7 +54,7 @@ class LecturesAdapter(onLectureClickListener: OnLectureClickListener) : Recycler
 
         init {
             itemView.setOnClickListener {
-                onLectureClickListener.onLectureClick(lecturesList[layoutPosition])
+                onLectureClickListener.onLectureSelected(lecturesList[layoutPosition])
             }
         }
 
@@ -63,16 +64,14 @@ class LecturesAdapter(onLectureClickListener: OnLectureClickListener) : Recycler
             roomTextView.text = "Room ${lecture.room}"
             trackTextView.setChipData(lecture.track)
 
-            lecture.speaker?.let {speaker ->
-                            speakerNameTextView.text = "${speaker.firstName} ${speaker.lastName}" //FIXME разбить на два поля
-                            speakerJobInfoTextView.text =  if (speaker.company != "") { "${speaker.jobTitle} at ${speaker.company}" } else {
-                                speaker.jobTitle
-                            }
+            lecture.speaker?.let { speaker ->
+                speakerNameTextView.text = "${speaker.firstName} ${speaker.lastName}" //FIXME разбить на два поля
+                speakerJobInfoTextView.text = if (speaker.company != "") {
+                    "${speaker.jobTitle} at ${speaker.company}"
+                } else {
+                    speaker.jobTitle
+                }
             }
         }
-    }
-
-    interface OnLectureClickListener {
-        fun onLectureClick(lecture: Lecture)
     }
 }
