@@ -37,7 +37,9 @@ class LectureDetailsFragment : Fragment() {
         }
         if (context is OnListLecturesClick) {
             listenerListLecturesClick = context
-        } else { throw ClassCastException("$context must implement OnLecturesListClick") }
+        } else {
+            throw ClassCastException("$context must implement OnLecturesListClick")
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

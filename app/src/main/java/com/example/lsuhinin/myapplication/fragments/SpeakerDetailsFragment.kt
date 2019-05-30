@@ -13,7 +13,7 @@ import com.example.lsuhinin.myapplication.pojo.Lecture
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_speaker_details.*
 
-class SpeakerDetailsFragment: Fragment() {
+class SpeakerDetailsFragment : Fragment() {
     lateinit var lecture: Lecture
 
     companion object {
@@ -40,7 +40,11 @@ class SpeakerDetailsFragment: Fragment() {
             Picasso.get().load(speaker.photo).into(speakerPhoto)
             speakerCountry.setImageResource(R.drawable.rus_flag)         //FIXME прикруть поглощатор урла
             speaker_first_name.text = "${speaker.firstName.toUpperCase()} ${speaker.lastName.toUpperCase()}" //FIXME разбить на два поля
-            speakerJob.text = if (speaker.company != "") { "${speaker.jobTitle} at ${speaker.company}" } else { speaker.jobTitle } //FIXME добавить в локали
+            speakerJob.text = if (speaker.company != "") {
+                "${speaker.jobTitle} at ${speaker.company}"
+            } else {
+                speaker.jobTitle
+            } //FIXME добавить в локали
             speakerLocation.text = speaker.location
             speaker_info.text = speaker.about
 
