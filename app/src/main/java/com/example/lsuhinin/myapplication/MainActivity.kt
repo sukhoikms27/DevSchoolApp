@@ -13,7 +13,7 @@ import com.example.lsuhinin.myapplication.pojo.Lecture
 
 class MainActivity : AppCompatActivity(), LecturesListFragment.OnLectureSelected, LectureDetailsFragment.OnSpeakerClick, LectureDetailsFragment.OnListLecturesClick {
     override fun onListLecturesClick() {
-        supportFragmentManager.popBackStack("lecturesList", FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        supportFragmentManager.popBackStack()
 //        val lecturesListFragment = LecturesListFragment.newInstance()
 //        supportFragmentManager.inTransaction { replace(R.id.fragment_container, lecturesListFragment, "lecturesList") }
     }
@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity(), LecturesListFragment.OnLectureSelected
         var fragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
         if (fragment == null) {
             fragment = createFragment()
-            supportFragmentManager.inTransaction { add(R.id.fragment_container, fragment, "lecturesList"); addToBackStack("lecturesList") }
+            supportFragmentManager.inTransaction { add(R.id.fragment_container, fragment, "lecturesList") }
         }
     }
 

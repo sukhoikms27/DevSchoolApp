@@ -26,21 +26,13 @@ class LecturesListFragment : Fragment() {
     private lateinit var skeleton: Skeleton
     private lateinit var listener: OnLectureSelected
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        retainInstance = true
-    }
 
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-        if (context is OnLectureSelected) {
-            listener = context
-        } else {
-            throw ClassCastException("$context must implement OnLectureSelected")
-        }
+    companion object {
+        fun newInstance(): LecturesListFragment = LecturesListFragment()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        retainInstance = true
         return inflater.inflate(R.layout.fragment_lectures_list, container, false)
     }
 
@@ -54,8 +46,13 @@ class LecturesListFragment : Fragment() {
         LecturesListAsyncTask().execute()
     }
 
-    companion object {
-        fun newInstance(): LecturesListFragment = LecturesListFragment()
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        if (context is OnLectureSelected) {
+            listener = context
+        } else {
+            throw ClassCastException("$context must implement OnLectureSelected")
+        }
     }
 
     inner class LecturesListAsyncTask : AsyncTask<Long, Int, Collection<Lecture>?>() {
@@ -80,7 +77,7 @@ class LecturesListFragment : Fragment() {
             return if (context!!.isConnectedToInternet()) {
                 val response = Retrofit.getInstance().getResponse().execute().body()
                 response?.let { getLectures(it) }.apply {
-                    saveData(this!!)
+                    this?.let { saveData(it) }
                     return this
                 }
             } else {
