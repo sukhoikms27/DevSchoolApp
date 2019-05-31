@@ -1,18 +1,21 @@
 package com.example.lsuhinin.myapplication.api
 
 import com.example.lsuhinin.myapplication.network.Response
+import com.example.lsuhinin.myapplication.network.Retrofit
 import com.example.lsuhinin.myapplication.pojo.Lecture
+import kotlinx.coroutines.Deferred
 import retrofit2.Call
 import retrofit2.http.GET
 
 interface DevFestApi {
 
     @GET("devfestapi/data.json")
-    fun getResponse(): Call<Response>
+    fun getResponse(): Deferred<Response>
 
 }
 
-fun getLectures(response: Response): Collection<Lecture>? {
+suspend fun getLectures(): Collection<Lecture>? {
+    val response = Retrofit.getInstance().getResponse().await()
     val talks = response.schedule.talks
     val speakers = response.speakers
     var lectures: Collection<Lecture>
