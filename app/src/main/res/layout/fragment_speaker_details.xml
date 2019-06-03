@@ -31,7 +31,7 @@
             android:id="@+id/speakerCountry"
             android:layout_width="37dp"
             android:layout_height="37dp"
-            android:src="@drawable/rus_flag"
+            android:src="@drawable/ru_flag"
             app:civ_border_color="@color/white"
             app:civ_border_width="3dp"
             app:layout_constraintBottom_toBottomOf="@id/speakerPhoto"

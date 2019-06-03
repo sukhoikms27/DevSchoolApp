@@ -58,7 +58,8 @@ class LectureDetailsFragment : Fragment() {
 
     fun displayLectureInfo(lecture: Lecture) {
         topic.text = lecture.title
-        track.setChipData(lecture.track)
+        track.text = lecture.trackText
+        track.setChipIconResource(lecture.trackIcon)
         author.text = "${lecture.speaker!!.firstName} ${lecture.speaker!!.lastName}" //FIXME разбить на два поля
         description.text = lecture.description
         info.visibility = View.GONE

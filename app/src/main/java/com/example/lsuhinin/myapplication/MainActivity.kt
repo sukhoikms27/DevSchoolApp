@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.example.lsuhinin.myapplication.fragments.LectureDetailsFragment
 import com.example.lsuhinin.myapplication.fragments.LecturesListFragment
 import com.example.lsuhinin.myapplication.fragments.SpeakerDetailsFragment
@@ -14,8 +13,6 @@ import com.example.lsuhinin.myapplication.pojo.Lecture
 class MainActivity : AppCompatActivity(), LecturesListFragment.OnLectureSelected, LectureDetailsFragment.OnSpeakerClick, LectureDetailsFragment.OnListLecturesClick {
     override fun onListLecturesClick() {
         supportFragmentManager.popBackStack()
-//        val lecturesListFragment = LecturesListFragment.newInstance()
-//        supportFragmentManager.inTransaction { replace(R.id.fragment_container, lecturesListFragment, "lecturesList") }
     }
 
     private val layoutResId: Int

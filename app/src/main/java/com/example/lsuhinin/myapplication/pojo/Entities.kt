@@ -3,6 +3,7 @@ package com.example.lsuhinin.myapplication.pojo
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.lsuhinin.myapplication.R
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
@@ -20,7 +21,17 @@ data class Speaker(
         var flagImage: String?,
         @Embedded
         var links: Links?
-) : Serializable
+) : Serializable {
+    val flagResource
+        get() = when (flagImage) {
+            "ru" -> { R.drawable.ru_flag }
+            "de" -> { R.drawable.de_flag }
+            "us" -> { R.drawable.us_flag }
+            "gb" -> { R.drawable.uk_flag }
+            "ua" -> { R.drawable.ua_flag }
+            else -> throw Exception("Flag not find: $flagImage")
+        }
+}
 
 @Entity
 data class Links(
@@ -60,7 +71,28 @@ data class Lecture(
         @Embedded
         var speaker: Speaker?,
         var time: String
-) : Serializable
+) : Serializable {
+
+    val roomText get() = "Room $room"
+
+    val trackText
+        get() = track.capitalize()
+
+    val trackIcon
+        get() = when (track) {
+            "android" -> {
+                R.drawable.shape_oval_coral
+            }
+            "frontend" -> {
+                R.drawable.shape_oval_prismatic_blue
+            }
+            "common" -> {
+                R.drawable.shape_oval_violet
+            }
+            else -> throw Exception("Track not find: $track")
+        }
+
+}
 
 val DEVELOPER: Lecture = Lecture(
         title = "DEVELOPER",

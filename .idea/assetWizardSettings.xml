@@ -157,8 +157,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_information" />
-                            <entry key="sourceFile" value="$PROJECT_DIR$/../information-outline.svg" />
+                            <entry key="outputName" value="us_flag" />
+                            <entry key="sourceFile" value="$PROJECT_DIR$/../flags/us_flag.svg" />
                           </map>
                         </option>
                       </PersistentState>

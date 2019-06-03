@@ -61,8 +61,9 @@ class LecturesAdapter(onLectureClickListener: LecturesListFragment.OnLectureSele
         fun bind(lecture: Lecture) {
             timeTextView.text = lecture.time
             topicTextView.text = lecture.title
-            roomTextView.text = "Room ${lecture.room}"
-            trackTextView.setChipData(lecture.track)
+            roomTextView.text = lecture.roomText
+            trackTextView.text = lecture.trackText
+            trackTextView.setChipIconResource(lecture.trackIcon)
 
             lecture.speaker?.let { speaker ->
                 speakerNameTextView.text = "${speaker.firstName} ${speaker.lastName}" //FIXME разбить на два поля
