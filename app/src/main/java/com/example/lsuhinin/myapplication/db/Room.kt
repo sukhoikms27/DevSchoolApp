@@ -3,30 +3,30 @@ package com.example.lsuhinin.myapplication.db
 import android.content.Context
 import androidx.room.*
 import com.example.lsuhinin.myapplication.pojo.Lecture
-import com.example.lsuhinin.myapplication.pojo.Links
-import com.example.lsuhinin.myapplication.pojo.Speaker
 
 @Database(entities = [Lecture::class], version = 1)
-abstract class AppDatabase: RoomDatabase() {
+abstract class AppDatabase : RoomDatabase() {
 
     abstract fun lectureDao(): LectureDao
 
     companion object {
-        var INSTANCE: AppDatabase? = null
 
-        fun getAppDataBase(context: Context): AppDatabase? {
-            if (INSTANCE == null) {
-                synchronized(AppDatabase::class) {
-                    INSTANCE = Room.databaseBuilder(context.applicationContext,
-                            AppDatabase::class.java, "lectures.db")
-                            .build()
-                }
+        @Volatile
+        private var instance: AppDatabase? = null
+
+        fun getInstance(context: Context): AppDatabase {
+            return instance ?: synchronized(this) {
+                instance ?: buildDatabase(context).also { instance = it }
             }
-            return INSTANCE
         }
 
+        fun buildDatabase(context: Context) =
+                Room.databaseBuilder(context, AppDatabase::class.java, "lecturesdb")
+                        .build()
+
+
         fun destroyInstance() {
-            INSTANCE = null
+            instance = null
         }
     }
 
