@@ -51,7 +51,6 @@ class LecturesListFragment : Fragment() {
         }
         skeleton = lectures_recycler_view.applySkeleton(R.layout.lecture_item_view, 4)
         skeleton.showSkeleton()
-
         lecturesJob = GlobalScope.launch {
             val response = getLectures()
             withContext(Dispatchers.Main) {
@@ -95,8 +94,8 @@ class LecturesListFragment : Fragment() {
     }
 
     fun restoreData(): Collection<Lecture> {
-        var db = AppDatabase.getInstance(context!!)
-        return db?.lectureDao()!!.getAllLectures()
+        val db = AppDatabase.getInstance(context!!)
+        return db.lectureDao().getAllLectures()
 
     }
 
