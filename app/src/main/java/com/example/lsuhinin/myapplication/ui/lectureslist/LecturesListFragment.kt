@@ -52,7 +52,7 @@ class LecturesListFragment : Fragment() {
         lecturesJob = GlobalScope.launch {
             if (context!!.isConnectedToInternet()) {
                 val response: Response? = Retrofit.getInstance().getResponse().await()
-                lectures = response!!.let { getLectures(it) }
+                lectures = response?.let { getLectures(it) } ?: restoreData()
                 saveData(lectures)
             } else {
                 lectures = restoreData()
