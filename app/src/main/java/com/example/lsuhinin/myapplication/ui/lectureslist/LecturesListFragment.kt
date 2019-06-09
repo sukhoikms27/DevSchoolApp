@@ -1,4 +1,4 @@
-package com.example.lsuhinin.myapplication.fragments
+package com.example.lsuhinin.myapplication.ui.lectureslist
 
 import android.content.Context
 import android.os.Bundle
@@ -7,20 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.PeriodicWorkRequestBuilder
-import androidx.work.WorkManager
 import com.example.lsuhinin.myapplication.R
-import com.example.lsuhinin.myapplication.adapter.LecturesAdapter
-import com.example.lsuhinin.myapplication.api.getLectures
-import com.example.lsuhinin.myapplication.db.AppDatabase
-import com.example.lsuhinin.myapplication.pojo.Lecture
-import com.example.lsuhinin.myapplication.workers.UpdateDatabaseWorker
+import com.example.lsuhinin.myapplication.helpers.isConnectedToInternet
+import com.example.lsuhinin.myapplication.model.Lecture
+import com.example.lsuhinin.myapplication.model.getLectures
+import com.example.lsuhinin.myapplication.model.network.Response
+import com.example.lsuhinin.myapplication.model.network.Retrofit
+import com.example.lsuhinin.myapplication.model.room.LecturesDatabase
 import com.faltenreich.skeletonlayout.Skeleton
 import com.faltenreich.skeletonlayout.applySkeleton
 import kotlinx.android.synthetic.main.fragment_lectures_list.*
 import kotlinx.coroutines.*
-import java.util.concurrent.TimeUnit
 
 class LecturesListFragment : Fragment() {
 
@@ -28,8 +25,9 @@ class LecturesListFragment : Fragment() {
     private lateinit var skeleton: Skeleton
     private lateinit var listener: OnLectureSelected
     private var lecturesJob: Job? = null
-    private var saveDataJob: Job? = null
-    val updateDatabaseWorker = PeriodicWorkRequestBuilder<UpdateDatabaseWorker>(1, TimeUnit.DAYS).build()
+    private lateinit var lectures: Collection<Lecture>
+//fixme disable for debug
+//    val updateDatabaseWorker = PeriodicWorkRequestBuilder<UpdateDatabaseWorker>(1, TimeUnit.DAYS).build()
 
 
     companion object {
@@ -52,15 +50,22 @@ class LecturesListFragment : Fragment() {
         skeleton = lectures_recycler_view.applySkeleton(R.layout.lecture_item_view, 4)
         skeleton.showSkeleton()
         lecturesJob = GlobalScope.launch {
-            val response = getLectures()
+            if (context!!.isConnectedToInternet()) {
+                val response: Response? = Retrofit.getInstance().getResponse().await()
+                lectures = response!!.let { getLectures(it) }
+                saveData(lectures)
+            } else {
+                lectures = restoreData()
+            }
+
             withContext(Dispatchers.Main) {
                 skeleton.showOriginal()
-                response?.let { lecturesAdapter.setItems(it) }
-                        ?: lecturesAdapter.setItems(restoreData())
+
+                lecturesAdapter.setItems(lectures)
             }
         }
-
-        WorkManager.getInstance().enqueue(updateDatabaseWorker)
+//fixme disable for debug
+//        WorkManager.getInstance().enqueue(updateDatabaseWorker)
     }
 
     override fun onAttach(context: Context?) {
@@ -74,27 +79,24 @@ class LecturesListFragment : Fragment() {
 
     override fun onDestroy() {
         lecturesJob?.cancel()
-        saveDataJob = GlobalScope.launch {
-            saveData(lecturesAdapter.getItems())
-        }
         super.onDestroy()
     }
 
     fun saveData(lectures: Collection<Lecture>) {
         context?.let {
-            AppDatabase.getInstance(it).apply {
+            LecturesDatabase.getInstance(it).apply {
                 this.let {
                     lectureDao().run {
                         deleteAllLectures()
                         insertAll(*lectures.toTypedArray())
                     }
                 }
-        }
+            }
         }
     }
 
     fun restoreData(): Collection<Lecture> {
-        val db = AppDatabase.getInstance(context!!)
+        val db = LecturesDatabase.getInstance(context!!)
         return db.lectureDao().getAllLectures()
 
     }

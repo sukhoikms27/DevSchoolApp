@@ -1,4 +1,4 @@
-package com.example.lsuhinin.myapplication.adapter
+package com.example.lsuhinin.myapplication.ui.lectureslist
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,9 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lsuhinin.myapplication.R
-import com.example.lsuhinin.myapplication.fragments.LecturesListFragment
-import com.example.lsuhinin.myapplication.helpers.setChipData
-import com.example.lsuhinin.myapplication.pojo.Lecture
+import com.example.lsuhinin.myapplication.model.Lecture
 import com.google.android.material.chip.Chip
 
 

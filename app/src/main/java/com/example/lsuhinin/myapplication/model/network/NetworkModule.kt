@@ -1,10 +1,6 @@
-package com.example.lsuhinin.myapplication.network
+package com.example.lsuhinin.myapplication.model.network
 
-import com.example.lsuhinin.myapplication.api.DevFestApi
-import com.example.lsuhinin.myapplication.pojo.Schedule
-import com.example.lsuhinin.myapplication.pojo.Speaker
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -17,11 +13,5 @@ object Retrofit {
                 .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build().create(DevFestApi::class.java)
-
     }
 }
-
-data class Response(
-        var speakers: Collection<Speaker>,
-        var schedule: Schedule
-)

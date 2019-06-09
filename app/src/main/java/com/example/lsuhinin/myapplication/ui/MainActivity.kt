@@ -1,14 +1,15 @@
-package com.example.lsuhinin.myapplication
+package com.example.lsuhinin.myapplication.ui
 
 import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.lsuhinin.myapplication.fragments.LectureDetailsFragment
-import com.example.lsuhinin.myapplication.fragments.LecturesListFragment
-import com.example.lsuhinin.myapplication.fragments.SpeakerDetailsFragment
+import com.example.lsuhinin.myapplication.R
 import com.example.lsuhinin.myapplication.helpers.inTransaction
-import com.example.lsuhinin.myapplication.pojo.Lecture
+import com.example.lsuhinin.myapplication.model.Lecture
+import com.example.lsuhinin.myapplication.ui.lecturedetails.LectureDetailsFragment
+import com.example.lsuhinin.myapplication.ui.lectureslist.LecturesListFragment
+import com.example.lsuhinin.myapplication.ui.speakerdetails.SpeakerDetailsFragment
 
 class MainActivity : AppCompatActivity(), LecturesListFragment.OnLectureSelected, LectureDetailsFragment.OnSpeakerClick, LectureDetailsFragment.OnListLecturesClick {
     override fun onListLecturesClick() {
